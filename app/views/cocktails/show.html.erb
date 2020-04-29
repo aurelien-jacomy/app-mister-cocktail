@@ -1,0 +1,42 @@
+<% if @cocktail.picture_url == "" || @cocktail.picture_url.nil?  %>
+	<% url = "https://source.unsplash.com/featured/?drink,#{@cocktail.name.gsub(' ', ',')}" %>
+<% else %>
+	<% url = @cocktail.picture_url %>
+<% end %>
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(<%= url %>);">
+  
+  <div class="container">
+    <h1>Discover the <strong><%= @cocktail.name %></strong> </h1>
+  </div>
+
+</div>
+
+
+
+<div class="container my-4">
+	<div class="row justify-content-center">
+		<div class="card-content col-12 col-md-8">
+			<% @cocktail.doses.each do |dose| %>
+				<div class="d-flex justify-content-between align-items-center">
+					<p><%= dose.description %> of <%= dose.ingredient.name %> </p>
+					<%= link_to dose, method: :delete, data: { confirm: "Are you sure you want to delete this dose?"}  do %> 
+						<i class="fas fa-trash"></i>
+					<% end %>
+				</div>
+				<% unless dose == @cocktail.doses.last %>
+					<hr>
+				<% end %>
+			<% end %>
+		</div>
+	</div>
+
+	<div class="row justify-content-center">
+		<div class="col-12 col-md-8">
+		<%= simple_form_for [@cocktail, @dose] do |f| %>
+			<%= f.association :ingredient, item_wrapper_class: "select-box" %>
+			<%= f.input :description %>
+			<%= f.submit class: "btn btn-primary" %>
+		<% end %>
+		</div>
+	</div>
+</div>

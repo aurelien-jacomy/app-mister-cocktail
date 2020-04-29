@@ -1,1 +1,33 @@
 // Specific CSS for your home-page
+.grid-container {
+  	width: 100vw;
+  	padding: 0px 40px;
+  	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	grid-gap: 16px;
+	background: $sand;
+}
+
+.home-container {
+	padding: 40px;
+	h1 {
+		font-size: 40px;
+		font-weight: bolder;
+		letter-spacing: 6px;
+		color: $indigo;
+		text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+	}
+}
+
+@media(max-width: 1200px) {
+  	.grid-container {
+  		grid-template-columns: 1fr 1fr 1fr;
+  	}
+}
+
+@media(max-width: 750px) {
+	.grid-container {
+    	grid-template-columns: 1fr 1fr;
+  	}
+}
+
