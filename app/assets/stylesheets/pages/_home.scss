@@ -31,3 +31,15 @@
   	}
 }
 
+@media(max-width: 600px) {
+	.grid-container {
+    	grid-template-columns: 1fr;
+  	}
+  	.card-product {
+  		justify-self: center;
+  	}
+  	h1 {
+  		margin: 0px auto;
+  		text-align: center;
+  	}
+}
