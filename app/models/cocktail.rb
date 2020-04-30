@@ -4,8 +4,5 @@ class Cocktail < ApplicationRecord
   has_many :ingredients, through: :doses
   has_one_attached :photo
   accepts_nested_attributes_for :doses
-
-  def picture_url
-  	return nil
-  end
+  
 end

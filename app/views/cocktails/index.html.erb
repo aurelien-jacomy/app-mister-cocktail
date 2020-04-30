@@ -1,18 +1,24 @@
-<div class="banner">
+<div class="banner homepage">
 	<h1>Find a cocktail, Create great a cocktail !</h1>	
 </div>
 
 <div class="grid-container">
 	<% @cocktails.each do |cocktail| %>
-	    <% if cocktail.picture_url.nil? %>
-	    	<% url = "https://source.unsplash.com/featured/?drink,#{cocktail.name.gsub(' ', ',')}" %>
+
+	    <% if cocktail.photo.attached? %>
+	    	<div class="card-product" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= cl_image_path cocktail.photo.key, height: 560, width: 560, crop: :fill %>)"  >
+				<%= link_to cocktail.name, cocktail %>	
+			</div>	
+	   
 	    <% else %>
-	    	<% url = cocktail.picture_url %>
+	    	<% url = "https://source.unsplash.com/featured/?drink,#{cocktail.name.gsub(' ', ',')}" %>
+	    	<div class="card-product" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= url %>)"  >
+				<%= link_to cocktail.name, cocktail %>	
+			</div>
+
 	    <% end %>
 	  
-		<div class="card-product" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= url %>"  >
-			<%= link_to cocktail.name, cocktail %>	
-		</div>
+		
 		
 	<% end %>
 </div>

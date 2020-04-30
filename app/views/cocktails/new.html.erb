@@ -3,7 +3,7 @@
 		<div class="col-12 col-md-8">
 			<%= simple_form_for @cocktail do |f| %>
 				<%= f.input :name %>
-				<%= f.input :picture_url, label: "Url of your cocktail's picture" %>
+				<%= f.input :photo, as: :file, label: "Add a photo to your cocktail" %>
 			  	<%= f.submit class: "btn btn-primary" %>
 			<% end %>
 		</div>
