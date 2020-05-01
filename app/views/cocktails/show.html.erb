@@ -28,34 +28,54 @@
 					<hr>
 				<% end %>
 			<% end %>
-		</div>
-	</div>
-	<%= link_to "Add Dose", root_path, id: "add-dose" %>
-
-	<div class="row justify-content-center">
-		<div class="col-12 col-md-8" id="dose-form" style="<%= 'display: none' unless @cocktail.doses == [] %>">
-		<%= simple_form_for [@cocktail, @dose] do |f| %>
-			<%= f.association :ingredient, item_wrapper_class: "select-box" %>
-			<%= f.input :description %>
-			<%= f.submit class: "btn btn-primary" %>
-		<% end %>
-		</div>
-	</div>
-
-	<div class="row justify-content-center">
-		<div class="col-12 col-md-8">
-			<div class="text-card">
-				<%= simple_form_for [@cocktail, @review] do |f| %>
-						<%= f.input :content %>
-						<%= f.input :rating %>
-						<%= f.submit class: "btn btn-primary" %>
+			<div>
+				<%= link_to root_path, id: "add-dose" do %>
+					<i class="fas fa-plus"></i> Add a dose
 				<% end %>
 			</div>
+
+			<!-- DOSE FORM -->
+			<div id="dose-form" style="<%= 'display: none' unless @cocktail.doses == [] %>">
+				<%= simple_form_for [@cocktail, @dose] do |f| %>
+					<%= f.association :ingredient, item_wrapper_class: "select-box" %>
+					<%= f.input :description %>
+					<%= f.submit class: "btn btn-primary" %>
+				<% end %>
+			</div>
+
+		</div>
+	</div>
+	
+
+	
+	<!-- REVIEW FORM -->
+	<div class="row justify-content-center">
+		<div class="card-content col-12 col-md-8">
+			<%= simple_form_for [@cocktail, @review] do |f| %>
+					<%= f.input :content %>
+					<%= f.input :rating %>
+					<%= f.submit class: "btn btn-primary" %>
+			<% end %>
+		</div>
+	</div>
+					
+
+			<!-- SHOW REVIEWS -->
+	<div class="row justify-content-center">
+		<div class="card-content col-12 col-md-8">	
 			<% @reviews.each do |review| %>
-				<div class="text-card">
-					<p><%= review.content %></p>
-					<p><%= review.rating %></p>
-				</div>
+			<div class="d-flex justify-content-between align-items-center">
+				<p><%= review.content %></p>
+				<p>
+					<% review.rating.times do %>
+						<i class="fas fa-star" style="color: rgb(200,200,200);"></i>
+					<% end %>
+				</p>				
+			</div>
+
+				<% unless review == @cocktail.reviews.last %>
+					<hr>
+				<% end %>	
 			<% end %>
 		</div>
 	</div>

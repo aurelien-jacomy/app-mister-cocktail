@@ -1,3 +1,19 @@
 // Place all the styles related to the cocktails controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+#add-dose {
+	color: $light-gray;
+	a {
+		text-decoration: none;
+	}
+	&:hover {
+		color: $mid-gray;
+	}
+	a:hover {
+	 	text-decoration: none;	
+	}
+}
+
+#dose-form {
+	margin-bottom: 60px;
+}
