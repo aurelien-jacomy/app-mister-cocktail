@@ -3,10 +3,11 @@
 <% else %>
 	<% url = "https://source.unsplash.com/featured/?drink,#{@cocktail.name.gsub(' ', ',')}" %>
 <% end %>
-<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(<%= cl_image_path @cocktail.photo.key %>);">
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(<%= url %>);">
   
   <div class="container">
     <h1>Discover the <strong><%= @cocktail.name %></strong> </h1>
+    <p><i class="fas fa-star"></i> <%= @cocktail.rating %></p>
   </div>
 
 </div>
@@ -29,14 +30,33 @@
 			<% end %>
 		</div>
 	</div>
+	<%= link_to "Add Dose", root_path, id: "add-dose" %>
 
 	<div class="row justify-content-center">
-		<div class="col-12 col-md-8">
+		<div class="col-12 col-md-8" id="dose-form" style="<%= 'display: none' unless @cocktail.doses == [] %>">
 		<%= simple_form_for [@cocktail, @dose] do |f| %>
 			<%= f.association :ingredient, item_wrapper_class: "select-box" %>
 			<%= f.input :description %>
 			<%= f.submit class: "btn btn-primary" %>
 		<% end %>
+		</div>
+	</div>
+
+	<div class="row justify-content-center">
+		<div class="col-12 col-md-8">
+			<div class="text-card">
+				<%= simple_form_for [@cocktail, @review] do |f| %>
+						<%= f.input :content %>
+						<%= f.input :rating %>
+						<%= f.submit class: "btn btn-primary" %>
+				<% end %>
+			</div>
+			<% @reviews.each do |review| %>
+				<div class="text-card">
+					<p><%= review.content %></p>
+					<p><%= review.rating %></p>
+				</div>
+			<% end %>
 		</div>
 	</div>
 </div>

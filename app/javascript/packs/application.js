@@ -19,9 +19,10 @@ require("channels")
 import 'bootstrap';
 
 import { initSelect } from '../plugins/init_select'
+import { showForm } from './show_form'
 
 document.addEventListener('turbolinks:load', () => {
   // Call your JS functions here
-	console.log('javascript loaded')
 	initSelect();
+	showForm();
 });
